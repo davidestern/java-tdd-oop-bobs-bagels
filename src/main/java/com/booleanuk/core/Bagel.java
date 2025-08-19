@@ -1,20 +1,26 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Bagel extends Product {
-    List<Filling> fillings;
+    private List<Filling> fillings;
 
     public Bagel(String sku, double price, String name, String variant) {
         super(sku, price, name, variant);
-    }
-
-    public void addFilling(Filling filling) {
-
+        this.fillings = new ArrayList<>();
     }
 
     public double getTotalPrice() {
-        return 0;
+        double sum = getPrice();
+        for (Filling f : fillings) {
+            sum += f.getPrice();
+        }
+        return sum;
+    }
+
+    public void addFilling(Filling filling) {
+        fillings.add(filling);
     }
 
     public List<Filling> getFillings() {

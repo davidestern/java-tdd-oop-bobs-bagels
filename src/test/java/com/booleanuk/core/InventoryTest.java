@@ -3,19 +3,15 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class InventoryTest {
+public class InventoryTest extends BaseTest {
 
     @Test
     public void productNotExistShouldReturnFalse() {
-        Inventory i = new Inventory();
-
-        Assertions.assertFalse(i.hasProduct("NotRealSku"));
+        Assertions.assertFalse(inventory.hasProduct("NotRealSku"));
     }
 
     @Test
     public void productExistShouldReturnTrue() {
-        Inventory i = new Inventory();
-
-        Assertions.assertFalse(i.hasProduct("BGLO"));
+        Assertions.assertTrue(inventory.hasProduct("BGLO"));
     }
 }

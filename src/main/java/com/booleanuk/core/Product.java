@@ -14,6 +14,10 @@ public abstract class Product {
     }
 
     // Getters
+    public String getSku() {
+        return sku;
+    }
+
     public double getPrice() {
         return price;
     }
