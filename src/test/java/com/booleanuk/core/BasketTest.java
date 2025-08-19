@@ -38,6 +38,8 @@ public class BasketTest extends BaseTest {
         b.addProduct(new Bagel("BGLO", 0.49, "Bagel", "Onion"));
         b.addProduct(new Bagel("BGLO", 0.49, "Bagel", "Onion"));
 
+        Basket.setCapacity(10);
+
         Assertions.assertThrows(IllegalArgumentException.class, () -> b.addProduct(new Bagel("BGLO", 0.49, "Bagel", "Onion")));
     }
 

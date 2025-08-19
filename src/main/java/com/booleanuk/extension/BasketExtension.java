@@ -1,13 +1,18 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
+
+import com.booleanuk.core.Bagel;
+import com.booleanuk.core.Filling;
+import com.booleanuk.core.IInventory;
+import com.booleanuk.core.Product;
 
 import java.util.List;
 
-public class Basket {
+public class BasketExtension {
     private List<Product> products;
     private static int capacity = 100;
     private final IInventory inventory;
 
-    public Basket(List<Product> products, IInventory inventory) {
+    public BasketExtension(List<Product> products, IInventory inventory) {
         this.inventory = inventory;
         setProducts(products);
     }
@@ -50,15 +55,18 @@ public class Basket {
     }
 
     public double getTotalCost() {
+        DiscountCalculator dc = new DiscountCalculator(products);
         double sum = 0;
         for (Product p : products) {
             if (p instanceof Bagel) {
-                sum += ((Bagel) p).getTotalPrice();
+                for (Filling f : ((Bagel) p).getFillings()) {
+                    sum += f.getPrice();
+                }
             } else {
                 sum += p.getPrice();
             }
         }
-        return sum;
+        return sum + dc.calculateDiscountedPrice();
     }
 
     public List<Product> getProducts() {
@@ -77,6 +85,6 @@ public class Basket {
         if (capacity <= 0) {
             throw new IllegalArgumentException("Capacity must be greater than zero");
         }
-        Basket.capacity = capacity;
+        BasketExtension.capacity = capacity;
     }
 }
